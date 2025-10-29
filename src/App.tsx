@@ -4,7 +4,8 @@ import Produtos from './containers/Produtos'
 
 import { GlobalStyle } from './styles'
 
-import { store } from './store'
+import { configStore } from './store'
+const store = configStore()
 
 export type Game = {
   id: number

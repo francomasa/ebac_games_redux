@@ -13,15 +13,14 @@ const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer
 })
 
-export function configureStore(preloadedState?: PreloadedState<RootState>) {
+export function configStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware: () => any[]) =>
+    middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(api.middleware),
     preloadedState
   })
 }
 
 export type RootState = ReturnType<typeof rootReducer>
-
-export type AppStore = ReturnType<typeof configureStore>
+export type AppStore = ReturnType<typeof configStore>
