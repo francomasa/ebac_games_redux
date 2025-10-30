@@ -1,4 +1,4 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
 import { screen, waitFor } from '@testing-library/dom'
 
@@ -45,15 +45,12 @@ const mocks = [
 ]
 
 const server = setupServer(
-  rest.get(
-    'http://localhost4000/produtos',
-    (_requisisao, resposta, contexto) => {
-      // requisisao: todo o que envio ao servedor
-      // resposta: e a resposta que vamos devolver
-      // contexto: a traves dele que vamos a construir a resposta
-      return resposta(contexto.json(mocks))
-    }
-  )
+  http.get('http://localhost4000/produtos', () => {
+    // requisisao: todo o que envio ao servedor
+    // resposta: e a resposta que vamos devolver
+    // contexto: a traves dele que vamos a construir a resposta
+    return HttpResponse.json(mocks)
+  })
 )
 
 describe('Teste para o container orodutos', () => {
